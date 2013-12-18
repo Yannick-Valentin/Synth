@@ -44,7 +44,7 @@ var SynthPad = (function() {
 		oscillator = myAudioContext.createOscillator();
 		gainNode = myAudioContext.createGainNode();
 
-		oscillator.type = 'triangle';
+		oscillator.type = 'sawtooth';
 
 		gainNode.connect(myAudioContext.destination);
 		oscillator.connect(gainNode);
@@ -106,6 +106,6 @@ var canvas = document.getElementById('synth-pad');
 
 // Initialize the page.
 window.onload = function() {
-	fullPageResize(canvas);
+	//fullPageResize(canvas);
 	var synthPad = new SynthPad();
 }
