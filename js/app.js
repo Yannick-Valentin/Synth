@@ -3,33 +3,119 @@ var fullPageResize = function(elmt) {
 	elmt.height = window.innerHeight;
 };
 
+var lpf_cutoff_value = 20000,
+	lpf_resonance_value = 0,
+	lfo_intensity_value = 0.5,
+	osc1_waveform = 'sawtooth',
+	osc2_waveform = 'square';
+
+lpf_cutoff_range = document.getElementById('lpf_cutoff');
+lpf_cutoff_range.onchange = function() {
+	lpf_cutoff_value = this.value;
+}
+
+lpf_resonance_range = document.getElementById('lpf_resonance');
+lpf_resonance_range.onchange = function() {
+	lpf_resonance_value = this.value;
+}
+
+
+lfo_intensity_range = document.getElementById('lfo_intensity');
+lfo_intensity_range.onchange = function() {
+	lfo_intensity_value = this.value / 100;
+}
+
+osc1_waveform_select = document.getElementById('osc1_waveform');
+osc1_waveform_select.onchange = function() {
+	osc1_waveform = this.value;
+	console.log(osc1_waveform);
+}
+
+osc2_waveform_select = document.getElementById('osc2_waveform');
+osc2_waveform_select.onchange = function() {
+	osc2_waveform = this.value;
+	console.log(osc2_waveform);
+}
 
 var SynthPad = (function() {
 
 	// Variables
 	var myCanvas,
 		myAudioContext,
-		oscillator,
+		osc1,		
+		osc2,		
 		gainNode,
 
 		// Notes
-		lowNote = 261.63, // C4
-		highNote = 493.88; // B4
+		lowNote = 10, // E4
+		highNote = 800; // E4
 
-	// Constructor
+	// Constructeur
 	var SynthPad = function() {
 		myCanvas = document.getElementById('synth-pad');
 
-		// Create an audio context.
+		// Cree le audio context
 		myAudioContext = new webkitAudioContext();
 
 		SynthPad.setupEventListeners();
 	};
 
+	// Crée le son
+	SynthPad.setupSound = function() {
+
+		osc1 = myAudioContext.createOscillator();
+		osc2 = myAudioContext.createOscillator();
+
+		lfo = myAudioContext.createOscillator();
+		lfo_intensity = myAudioContext.createGain();
+		volume = myAudioContext.createGain();
+
+		/*filter = myAudioContext.createBiquadFilter();
+		filter.type = 3;  // In this case it's a lowshelf filter
+		filter.frequency.value = 80;
+		filter.Q.value = 0;
+		filter.gain.value = 0;*/
+
+		filter = myAudioContext.createBiquadFilter();
+		filter.type = filter.LOWPASS;
+		filter.frequency.value = lpf_cutoff_value;
+		filter.Q.value = lpf_resonance_value;
+
+
+		// Oscillators
+		osc1.type = osc1_waveform;
+		osc2.type = osc2_waveform;
+
+		osc1.connect(volume);
+		osc2.connect(volume);
+
+
+		// LFO
+		lfo.type = 'sine';
+		lfo_intensity.gain.value = lfo_intensity_value;
+
+		lfo.connect(lfo_intensity);
+		lfo_intensity.connect(volume.gain);
+
+		// Filter
+		volume.connect(filter);
+
+		console.log(filter);
+
+
+		filter.connect(myAudioContext.destination);
+	};
+
 	SynthPad.setupEventListeners = function() {
 		// Disables scrolling on touch devices.
-		document.body.addEventListener('touchmove', function(event) {
+		/*document.body.addEventListener('touchmove', function(event) {
 			event.preventDefault();
+		}, false);*/
+
+		document.body.addEventListener('touchmove', function(e) {
+			if (e.target.id != 'lpf_cutoff' && e.target.id != 'lpf_resonance' && e.target.id != 'lfo_intensity') {
+				e.preventDefault(); 
+			}
 		}, false);
 
 		myCanvas.addEventListener('mousedown', SynthPad.playSound);
@@ -38,64 +124,74 @@ var SynthPad = (function() {
 		myCanvas.addEventListener('mouseup', SynthPad.stopSound);
 		document.addEventListener('mouseleave', SynthPad.stopSound);
 		myCanvas.addEventListener('touchend', SynthPad.stopSound);
-	};
-
-	SynthPad.playSound = function(event) {
-		oscillator = myAudioContext.createOscillator();
-		gainNode = myAudioContext.createGainNode();
-
-		oscillator.type = 'sawtooth';
-
-		gainNode.connect(myAudioContext.destination);
-		oscillator.connect(gainNode);
-
-		SynthPad.updateFrequency(event);
-
-		oscillator.start(0);
-
-		myCanvas.addEventListener('mousemove', SynthPad.updateFrequency);
-		myCanvas.addEventListener('touchmove', SynthPad.updateFrequency);
-
 		myCanvas.addEventListener('mouseout', SynthPad.stopSound);
 	};
 
-	SynthPad.stopSound = function(event) {
-		oscillator.stop(0);
+	// Joue le son
+	SynthPad.playSound = function(event) {
 
-		myCanvas.removeEventListener('mousemove', SynthPad.updateFrequency);
-		myCanvas.removeEventListener('touchmove', SynthPad.updateFrequency);
-		myCanvas.removeEventListener('mouseout', SynthPad.stopSound);
+		SynthPad.setupSound();
+
+		SynthPad.updateSound(event);
+
+		osc1.start(0);
+		osc2.start(0);
+		lfo.start(0);
+
+		myCanvas.addEventListener('mousemove', SynthPad.updateSound);
+		myCanvas.addEventListener('touchmove', SynthPad.updateSound);
 	};
 
-	// Calculate the note frequency.
+	// Stop le son
+	SynthPad.stopSound = function(event) {
+		osc1.stop(0);
+		osc2.stop(0);
+		lfo.stop(0);
+
+		//alert('stop');
+
+		/*myCanvas.removeEventListener('mousemove', SynthPad.updateSound);
+		myCanvas.removeEventListener('touchmove', SynthPad.updateSound);
+		myCanvas.removeEventListener('mouseout', SynthPad.stopSound);*/
+	};
+
+
+	// Calcule le pitch de la note
 	SynthPad.calculateNote = function(posX) {
 		var noteDifference = highNote - lowNote;
 		var noteOffset = (noteDifference / myCanvas.offsetWidth) * (posX - myCanvas.offsetLeft);
 		return lowNote + noteOffset;
 	};
 
-	SynthPad.calculateVolume = function(posY) {
-		var volumeLevel = 1 - (((100 / myCanvas.offsetHeight) * (posY - myCanvas.offsetTop)) / 100);
-		return volumeLevel;
+	// Calcule le volume
+	SynthPad.calculateLfoRate = function(posY) {
+		var lfoRate = (1 - (((100 / myCanvas.offsetHeight) * (posY - myCanvas.offsetTop)) / 100)) * 20;
+		return lfoRate;
+
 	};
 
-	// Fetch the new frequency and volume.
-	SynthPad.calculateFrequency = function(x, y) {
+
+	// Calcule le nouveau son avec le pitch et le volume
+	SynthPad.calculateSound = function(x, y) {
 		var noteValue = SynthPad.calculateNote(x);
-		var volumeValue = SynthPad.calculateVolume(y);
+		var lfoRate = SynthPad.calculateLfoRate(y);
 
-		oscillator.frequency.value = noteValue;
-		gainNode.gain.value = volumeValue;
+		osc1.frequency.value = noteValue;
+		osc2.frequency.value = noteValue;
+		lfo.frequency.value = lfoRate;
 	};
 
-	SynthPad.updateFrequency = function(event) {
+	// Met à jour le son
+	SynthPad.updateSound = function(event) {
 		if (event.type == 'mousedown' || event.type == 'mousemove') {
-			SynthPad.calculateFrequency(event.x, event.y);
+			SynthPad.calculateSound(event.x, event.y);
 		} else if (event.type == 'touchstart' || event.type == 'touchmove') {
 			var touch = event.touches[0];
-			SynthPad.calculateFrequency(touch.pageX, touch.pageY);
+			SynthPad.calculateSound(touch.pageX, touch.pageY);
 		}
 	};
+
+
 
 	// Export SynthPad.
 	return SynthPad;
@@ -109,3 +205,9 @@ window.onload = function() {
 	//fullPageResize(canvas);
 	var synthPad = new SynthPad();
 }
+
+/*
+osc1_waveform_select = document.getElementById('osc1_waveform');
+osc1_waveform_select.onchange = function() {
+	console.log(this.value);
+}*/
