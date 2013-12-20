@@ -13,48 +13,58 @@
 
 	<div id="control_panel">
 
-		<div class="panel">
-		
-			<h2>OSC1</h2>
-			<span id="log"></span>
-			<select id="osc1_waveform">
-				<option value="sine">Sine</option>
-				<option value="square">Square</option>
-				<option value="sawtooth" selected>Sawtooth</option>
-				<option value="triangle">Triangle</option>
-			</select>
+		<form name="controls_form">
 
-		</div>
-		<div class="panel">
-		
-			<h2>OSC2</h2>
-			<select id="osc2_waveform">
-				<option value="sine">Sine</option>
-				<option value="square" selected>Square</option>
-				<option value="sawtooth">Sawtooth</option>
-				<option value="triangle">Triangle</option>
-			</select>
-		
-		</div>
-		<div class="panel">
+			<div class="panel">
 
-			<h2>Filtre</h2>
-			<input id="lpf_cutoff" type="range" value="20000" max="20000" min="40">
-			<input id="lpf_resonance" type="range" value="0" max="100" min="0">
-		
-		</div>
-		<div class="panel">
+				<h2>OSC1</h2>
+				<input type="radio" name="osc1_waveform" value="sine" id="osc1_sine" checked> <label for="osc1_sine">Sine</label><br>
+				<input type="radio" name="osc1_waveform" value="square" id="osc1_square"> <label for="osc1_square">Square</label><br>
+				<input type="radio" name="osc1_waveform" value="sawtooth" id="osc1_sawtooth" > <label for="osc1_sawtooth">Sawtooth</label><br>
+				<input type="radio" name="osc1_waveform" value="triangle" id="osc1_triangle"> <label for="osc1_triangle">Triangle</label><br>
 
-			<h2>LFO</h2>
-			<input id="lfo_intensity" type="range" value="50" max="100" min="0">
+				<input id="osc1_volume" type="range" value="100" max="100" min="0">
 
-		</div>
+			</div>
+			<div class="panel">
+			
+				<h2>OSC2</h2>
+
+				<input type="radio" name="osc2_waveform" value="sine" id="osc2_sine"> <label for="osc2_sine">Sine</label><br>
+				<input type="radio" name="osc2_waveform" value="square" id="osc2_square" checked> <label for="osc2_square">Square</label><br>
+				<input type="radio" name="osc2_waveform" value="sawtooth" id="osc2_sawtooth"> <label for="osc2_sawtooth">Sawtooth</label><br>
+				<input type="radio" name="osc2_waveform" value="triangle" id="osc2_triangle"> <label for="osc2_triangle">Triangle</label><br>
+				
+				<input id="osc2_volume" type="range" value="100" max="100" min="0">
+				<input id="osc2_detune" type="range" value="0" max="1000" min="0">
+
+			
+			</div>
+			<div class="panel">
+
+				<h2>Filtre</h2>
+				<input id="lpf_cutoff" type="range" value="100" max="100" min="0">
+				<input id="lpf_resonance" type="range" value="0" max="20" min="0">
+			
+			</div>
+			<div class="panel">
+
+				<h2>LFO</h2>
+				<input id="lfo_intensity" type="range" value="50" max="100" min="0">
+
+			</div>
+
+		</form>
 
 	</div>
 	
-	<div id="synth-pad"></div>
+	<div id="synth-pad">
+		
+		<div id="finger"></div>
+
+	</div>
 	
-	<script src="js/app.js"></script>
+	<script src="js/app_.js"></script>
 
 </body>
 </html>

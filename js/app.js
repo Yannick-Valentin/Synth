@@ -9,34 +9,6 @@ var lpf_cutoff_value = 20000,
 	osc1_waveform = 'sawtooth',
 	osc2_waveform = 'square';
 
-lpf_cutoff_range = document.getElementById('lpf_cutoff');
-lpf_cutoff_range.onchange = function() {
-	lpf_cutoff_value = this.value;
-}
-
-lpf_resonance_range = document.getElementById('lpf_resonance');
-lpf_resonance_range.onchange = function() {
-	lpf_resonance_value = this.value;
-}
-
-
-lfo_intensity_range = document.getElementById('lfo_intensity');
-lfo_intensity_range.onchange = function() {
-	lfo_intensity_value = this.value / 100;
-}
-
-osc1_waveform_select = document.getElementById('osc1_waveform');
-osc1_waveform_select.onchange = function() {
-	osc1_waveform = this.value;
-	console.log(osc1_waveform);
-}
-
-osc2_waveform_select = document.getElementById('osc2_waveform');
-osc2_waveform_select.onchange = function() {
-	osc2_waveform = this.value;
-	console.log(osc2_waveform);
-}
-
 var SynthPad = (function() {
 
 	// Variables
@@ -47,8 +19,8 @@ var SynthPad = (function() {
 		gainNode,
 
 		// Notes
-		lowNote = 10, // E4
-		highNote = 800; // E4
+		lowNote = 16.35, // C0
+		highNote = 261.63; // C4
 
 	// Constructeur
 	var SynthPad = function() {
@@ -57,6 +29,7 @@ var SynthPad = (function() {
 		// Cree le audio context
 		myAudioContext = new webkitAudioContext();
 
+		SynthPad.setupSound();
 		SynthPad.setupEventListeners();
 	};
 
@@ -100,9 +73,6 @@ var SynthPad = (function() {
 		// Filter
 		volume.connect(filter);
 
-		console.log(filter);
-
-
 		filter.connect(myAudioContext.destination);
 	};
 
@@ -138,17 +108,19 @@ var SynthPad = (function() {
 		osc2.start(0);
 		lfo.start(0);
 
+		console.log(osc1.playbackState);
+
 		myCanvas.addEventListener('mousemove', SynthPad.updateSound);
 		myCanvas.addEventListener('touchmove', SynthPad.updateSound);
 	};
 
 	// Stop le son
 	SynthPad.stopSound = function(event) {
+
 		osc1.stop(0);
 		osc2.stop(0);
 		lfo.stop(0);
 
-		//alert('stop');
 
 		/*myCanvas.removeEventListener('mousemove', SynthPad.updateSound);
 		myCanvas.removeEventListener('touchmove', SynthPad.updateSound);
@@ -203,11 +175,36 @@ var canvas = document.getElementById('synth-pad');
 // Initialize the page.
 window.onload = function() {
 	//fullPageResize(canvas);
-	var synthPad = new SynthPad();
+	synthPad = new SynthPad();
 }
 
-/*
+
+
+lpf_cutoff_range = document.getElementById('lpf_cutoff');
+lpf_cutoff_range.onchange = function() {
+	lpf_cutoff_value = this.value;
+	synthPad.setupSound();
+}
+
+lpf_resonance_range = document.getElementById('lpf_resonance');
+lpf_resonance_range.onchange = function() {
+	lpf_resonance_value = this.value;
+}
+
+
+lfo_intensity_range = document.getElementById('lfo_intensity');
+lfo_intensity_range.onchange = function() {
+	lfo_intensity_value = this.value / 100;
+}
+
 osc1_waveform_select = document.getElementById('osc1_waveform');
 osc1_waveform_select.onchange = function() {
-	console.log(this.value);
-}*/
+	osc1_waveform = this.value;
+	console.log(osc1_waveform);
+}
+
+osc2_waveform_select = document.getElementById('osc2_waveform');
+osc2_waveform_select.onchange = function() {
+	osc2_waveform = this.value;
+	console.log(osc2_waveform);
+}
