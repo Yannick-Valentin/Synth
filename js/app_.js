@@ -8,6 +8,7 @@ function SynthPad() {
 
 	// Variables
 	var myCanvas = document.getElementById('synth-pad'),
+		myCanvasWrapper = document.getElementById('synth-pad-wrapper'),
 		finger = document.getElementById('finger'),
 		context,
 		osc1,		
@@ -36,6 +37,9 @@ function SynthPad() {
 		//lpf_cutoff_value = lpf_cutoff_range.value;
 
 		lpf_resonance_range = document.getElementById('lpf_resonance'),
+
+		//orientation_toggle = document.getElementById('orientation_toggle'),
+
 		//lpf_resonance_value = lpf_resonance_range.value;
 		lfo_intensity_range = document.getElementById('lfo_intensity'),
 		//lfo_intensity_value = lfo_intensity_range.value,
@@ -62,6 +66,8 @@ function SynthPad() {
 				e.preventDefault(); 
 			}
 		}, false);
+
+		this.setupSound;
 
 
 		// Changement du cutoff du filtre
@@ -104,6 +110,22 @@ function SynthPad() {
 		osc2_detune_range.onchange = function() {
 			SynthPad.changeOSC2detune(this.value);
 		}
+
+		orientation_toggle.onchange = function() {
+			if (this.checked)
+				window.addEventListener("deviceorientation", SynthPad.orientation, false);
+			else
+				window.removeEventListener("deviceorientation", SynthPad.orientation, false);
+		}
+			//document.getElementById('alpha').innerHTML = "alpha : "+event.alpha;
+			//document.getElementById('beta').innerHTML = "beta : "+Math.abs(event.beta);
+			//document.getElementById('gamma').innerHTML = "gamma : "+Math.abs(event.gamma);
+			//SynthPad.changeLFOintensity(Math.abs(event.gamma));
+			//lfo_intensity_range.value = Math.abs(event.gamma);
+
+	//		SynthPad.changeLPFcutoff(100-Math.abs(event.gamma));
+	//		lpf_cutoff_range.value = 100-Math.abs(event.gamma);
+	//	}
 
 		// Detection du click et du touché
 		myCanvas.addEventListener('mousedown', this.playSound, false);
@@ -259,7 +281,7 @@ function SynthPad() {
 		var maxp = 100;
 
 		// The result should be between 100 an 10000000
-		var minv = Math.log(20);
+		var minv = Math.log(40);
 		var maxv = Math.log(20000);
 
 		// calculate adjustment factor
@@ -274,7 +296,11 @@ function SynthPad() {
 
 	this.changeLFOintensity = function(value) {lfo_intensity.gain.value = value}
 	
-
+	this.orientation = function(event) {	
+		//document.getElementById('gamma').innerHTML = "gamma : "+Math.abs(event.gamma);
+		SynthPad.changeLPFcutoff(100-Math.abs(event.gamma));
+		lpf_cutoff_range.value = 100-Math.abs(event.gamma);
+	}
 
 	// Calcule le pitch de la note
 	this.calculateNote = function(posX) {	
@@ -302,8 +328,8 @@ function SynthPad() {
 
 	this.updateFinger = function(x, y) {
 		//finger.classList.add('active');
-		finger.style.top = y - finger.offsetHeight/2 - myCanvas.offsetTop + 'px';
-		finger.style.left = x - finger.offsetWidth/2 - myCanvas.offsetLeft + 'px' ;
+		finger.style.top = y - finger.offsetHeight/2 - myCanvasWrapper.offsetTop + 'px';
+		finger.style.left = x - finger.offsetWidth/2 - myCanvasWrapper.offsetLeft + 'px' ;
 	}	
 
 	// Met à jour le son
@@ -325,9 +351,6 @@ function SynthPad() {
 	//return SynthPad;
 }
 
-
-var canvas = document.getElementById('synth-pad'),
-	SynthPad;
 
 // Initialize the page.
 window.onload = function() {

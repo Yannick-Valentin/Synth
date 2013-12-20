@@ -15,15 +15,24 @@ body {
 	padding-top: 220px;
 }
 
-#synth-pad {
+#synth-pad-wrapper {
 	overflow: hidden;
 	width: 100%;
 	height: 100%;
 	position: relative;
-	background: #1E1E1E url('../images/grid.png');
+	background: #1E1E1E;
 }
 
-#synth-pad:hover {
+	#synth-pad { 
+		width: 100%;
+		height: 100%;
+		background:url('../images/grid.png');
+		position: relative;
+		z-index: 2;
+		opacity: 0.5;
+	}
+
+#synth-pad-wrapper:hover {
 	cursor: crosshair;	
 }
 
@@ -31,6 +40,7 @@ body {
 	display: block;
 	width: 20px; height: 20px; background: red;
 	position: absolute;
+	z-index: 1;
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
 	border-radius: 50%;
@@ -46,7 +56,7 @@ body {
 	transition: opacity ease 150ms;
 }
 
-	#synth-pad:active #finger {opacity: 0.5;}
+	#synth-pad-wrapper:active #finger {opacity: 0.5;}
 
 
 #control_panel {
