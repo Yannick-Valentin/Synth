@@ -48,6 +48,13 @@
 	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 html, body {
@@ -68,7 +75,6 @@ body {
 	width: 100%;
 	height: 100%;
 	position: relative;
-	background: #1E1E1E;
 
 	background: #282828;
 	background: -moz-radial-gradient(center, ellipse cover, #282828 0%, #151515 140%);
@@ -122,6 +128,7 @@ body {
 	overflow: hidden;
 	background: #111111;
 	color:#FFFFFF;
+	text-align: center;
 }
 
 	.panel {
@@ -135,9 +142,23 @@ body {
 		background: linear-gradient(to bottom, rgba(8,8,8,1) 0%,rgba(21,21,21,0) 35px);
 	}
 
+		a {
+			color: #FFF;
+			text-decoration: none;
+			display: block;
+			padding-top: 9px;
+			opacity: 0.5;
+			.-webkit-transition: opacity ease 150ms;
+			-moz-transition: opacity ease 150ms;
+			-ms-transition: opacity ease 150ms;
+			-o-transition: opacity ease 150ms;
+			transition: opacity ease 150ms;
+		}
+
+			a:hover {opacity: 1}
+
 		h2 {
 			margin: 0 0 10px;
-			text-align: center;
 			font-weight: normal;
 			font-size: 20px;
 		}
@@ -155,6 +176,7 @@ body {
 			position: relative;
 			cursor: pointer;
 			outline: 0;
+			opacity: 0.6;
 		}
 
 			input[type="radio"]:first-child {margin-left: 10px}
@@ -167,6 +189,8 @@ body {
 				line-height: 39px;
 				vertical-align: middle;
 			}
+
+			input[type="radio"]:checked, input[type="checkbox"]:checked {opacity: 1}
 
 			input[type="radio"]:checked:before, input[type="checkbox"]:checked:before {
 				text-shadow: 	0 0 24px #FFF, 
@@ -223,10 +247,11 @@ body {
 				position: relative;
 				z-index: 2;
 				border:none;
+				cursor: w-resize;
 			}
 
 	#orientation_toggle {
 		position: absolute;
 		right: 5px;
-		top: 22px;
+		top: 29px;
 	}

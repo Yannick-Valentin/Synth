@@ -45,7 +45,7 @@ function SynthPad() {
 		//lfo_intensity_value = lfo_intensity_range.value,
 
 		// Notes
-		lowNote = 5, // C0
+		lowNote = 1, // C0
 		highNote = 261.63; // C4
 
 	// Constructeur
