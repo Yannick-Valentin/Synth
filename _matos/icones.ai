@@ -1,0 +1,111 @@
+%!PS-Adobe-3.0
+%%Creator: Adobe Fireworks
+%%DocumentNeededResources: procset Adobe_level2_AI5 1.0 0
+%%+ procset Adobe_packedarray 2.0 0
+%%+ procset Adobe_cmykcolor 1.1 0
+%%+ procset Adobe_cshow 1.1 0
+%%+ procset Adobe_customcolor 1.0 0
+%%+ procset Adobe_typography_AI5 1.0 0
+%%+ procset Adobe_Illustrator_AI5 1.0 0
+%%BoundingBox:0 0 231 21
+%AI3_TemplateBox: 0 0 231 21
+%%PageOrigin:0 0
+%AI5_FileFormat 3
+%AI3_ColorUsage: Color
+%%DocumentProcessColors: Cyan Magenta Yellow Black
+%%EndComments
+%%BeginProlog
+%%EndProlog
+%%BeginSetup
+Adobe_packedarray /initialize get exec
+Adobe_cmykcolor /initialize get exec
+Adobe_cshow /initialize get exec
+Adobe_customcolor /initialize get exec
+Adobe_typography_AI5 /initialize get exec
+Adobe_Illustrator_AI5 /initialize get exec
+%%EndSetup
+1 1 1 1 0 0 0 79 128 255 Lb
+(Calque 1) Ln
+u
+1.000000 w
+2 J
+1.000 1.000 1.000 XA
+1 XR
+1.00 10.41 m
+5.20 23.25 9.40 23.14 13.60 10.41 c
+17.80 -2.31 22.00 -1.96 26.20 10.41 c
+S
+U
+u
+1.000000 w
+2 J
+1.000 1.000 1.000 XA
+1 XR
+58.00 10.52 m
+58.00 19.00 l
+70.60 19.00 l
+70.60 2.03 l
+83.20 2.03 l
+83.20 10.52 l
+S
+U
+u
+1.000000 w
+2 J
+1.000 1.000 1.000 XA
+1 XR
+115.00 2.03 m
+127.60 19.00 l
+127.60 2.03 l
+140.20 19.00 l
+140.20 2.03 l
+S
+U
+u
+1.000000 w
+2 J
+1.000 1.000 1.000 XA
+1 XR
+173.80 10.41 m
+180.10 18.90 l
+192.70 1.93 l
+199.00 10.41 l
+S
+U
+*u
+1.000 1.000 1.000 Xa
+1 XR
+218.36 6.60 m
+219.53 5.37 221.17 4.60 223.00 4.60 c
+226.11 4.60 228.70 6.82 229.28 9.76 c
+230.77 9.13 l
+229.93 5.61 226.77 3.00 223.00 3.00 c
+220.63 3.00 218.52 4.03 217.05 5.67 c
+215.00 4.20 l
+215.00 10.60 l
+220.60 8.20 l
+218.36 6.60 l
+f
+231.00 11.40 m
+225.40 13.80 l
+227.64 15.40 l
+226.47 16.63 224.83 17.40 223.00 17.40 c
+219.90 17.40 217.32 15.20 216.73 12.27 c
+215.23 12.89 l
+216.08 16.39 219.23 19.00 223.00 19.00 c
+225.37 19.00 227.48 17.97 228.95 16.33 c
+231.00 17.80 l
+231.00 11.40 l
+f
+*U
+LB
+%%PageTrailer
+gsave annotatepage grestore showpage
+%%Trailer
+Adobe_Illustrator_AI5 /terminate get exec
+Adobe_typography_AI5 /terminate get exec
+Adobe_customcolor /terminate get exec
+Adobe_cshow /terminate get exec
+Adobe_cmykcolor /terminate get exec
+Adobe_packedarray /terminate get exec
+%%EOF

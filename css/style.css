@@ -1,5 +1,53 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot');
+	src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/icomoon.woff') format('woff'),
+		url('../fonts/icomoon.ttf') format('truetype'),
+		url('../fonts/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-orientation:before {
+	content: "\e600";
+}
+.icon-sawtooth:before {
+	content: "\e601";
+}
+.icon-sine:before {
+	content: "\e602";
+}
+.icon-square:before {
+	content: "\e603";
+}
+.icon-triangle:before {
+	content: "\e604";
+}
+
+
+.fleft {float: left !important}
+.fright {float: right !important}
+
+
 *, *:before, *:after {
 	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
 }
 
 html, body {
@@ -8,11 +56,11 @@ html, body {
 }
 
 body {
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: 'Montserrat', Helvetica, Arial, sans-serif;
 	background: #333;
 	font-size: 0.875em;
 	color:#FFF;
-	padding-top: 220px;
+	padding-left: 240px;
 }
 
 #synth-pad-wrapper {
@@ -21,6 +69,14 @@ body {
 	height: 100%;
 	position: relative;
 	background: #1E1E1E;
+
+	background: #282828;
+	background: -moz-radial-gradient(center, ellipse cover, #282828 0%, #151515 140%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 140%, color-stop(0%,#282828), color-stop(140%,#151515));
+	background: -webkit-radial-gradient(center, ellipse cover, #282828 0%,#151515 140%);
+	background: -o-radial-gradient(center, ellipse cover, #282828 0%,#151515 140%);
+	background: -ms-radial-gradient(center, ellipse cover, #282828 0%,#151515 140%);
+	background: radial-gradient(ellipse at center, #282828 0%,#151515 140%);
 }
 
 	#synth-pad { 
@@ -29,7 +85,7 @@ body {
 		background:url('../images/grid.png');
 		position: relative;
 		z-index: 2;
-		opacity: 0.5;
+		opacity: 0.3;
 	}
 
 #synth-pad-wrapper:hover {
@@ -61,55 +117,111 @@ body {
 
 #control_panel {
 	position: fixed;
-	top: 0; left: 0; right: 0;
-	height: 220px;
+	top: 0; left: 0; bottom: 0;
+	width: 240px;
 	overflow: hidden;
-	padding: 20px;
-	background: #FFF;
-	color:#333;
+	background: #111111;
+	color:#FFFFFF;
 }
 
-h2 {margin-top: 0;}
-
-.panel {
-	width: 25%;
-	float: left;
-}
-
-
-input[type="range"] {
-	-webkit-appearance: none;
-	display: inline-block;
-	vertical-align: middle;
-	width: 170px;
-	height: 40px;
-	position: relative;
-	outline:0;
-}
-
-	input[type="range"]:after {
-		content:" ";
-		display: block;
-		background: #CCC;
-		position: absolute;
-		height: 3px;
-		-webkit-border-radius: 5px;
-		-moz-border-radius: 5px;
-		border-radius: 5px;
-		border-top: 1px solid #AAA;
-		left: 5px; right: 5px; top: 15px;
+	.panel {
+		position: relative;
+		padding-top: 30px;
+		background: -moz-linear-gradient(top, rgba(8,8,8,1) 0%, rgba(21,21,21,0) 35px);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(8,8,8,1)), color-stop(35px,rgba(21,21,21,0)));
+		background: -webkit-linear-gradient(top, rgba(8,8,8,1) 0%,rgba(21,21,21,0) 35px);
+		background: -o-linear-gradient(top, rgba(8,8,8,1) 0%,rgba(21,21,21,0) 35px);
+		background: -ms-linear-gradient(top, rgba(8,8,8,1) 0%,rgba(21,21,21,0) 35px);
+		background: linear-gradient(to bottom, rgba(8,8,8,1) 0%,rgba(21,21,21,0) 35px);
 	}
 
-input[type="range"]::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	width: 35px; height: 35px;
-	background: #FFF;
-	opacity: 1;
-	position: relative;
-	z-index: 2;
-	border:none;
-	-webkit-box-shadow: 0 1px 5px #AAA;
-	-moz-box-shadow: 0 1px 5px #AAA;
-	box-shadow: 0 1px 5px #AAA;
-	-webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%;
-}
+		h2 {
+			margin: 0 0 10px;
+			text-align: center;
+			font-weight: normal;
+			font-size: 20px;
+		}
+
+		/* Radios */
+		input[type="radio"], input[type="checkbox"] {
+			-webkit-appearance: none;
+   			border-radius: 0;
+			width: 39px; height: 39px;
+			display: block;
+			float: left;
+			margin-left: 20px;
+			position: relative;
+			cursor: pointer;
+			outline: 0;
+		}
+
+			input[type="radio"]:first-child {margin-left: 10px}
+
+			input[type="radio"]:before, input[type="checkbox"]:before {
+				position: absolute;
+				top: 0; right: 0; bottom: 0; left: 0;	
+				color: #FFF;
+				text-align: center;
+				line-height: 39px;
+				vertical-align: middle;
+			}
+
+			input[type="radio"]:checked:before, input[type="checkbox"]:checked:before {
+				text-shadow: 	0 0 24px #FFF, 
+								0 0 24px #FFF, 
+								0 0 6px #FFF, 
+								0 0 6px #FFF;
+			}
+
+		/* Range */
+		input[type="range"] {
+			-webkit-appearance: none;
+			display: block;
+			vertical-align: middle;
+			width: 100%;
+			height: 40px;
+			overflow: hidden;
+			position: relative;
+			outline:0;
+			background-color: #FFF;
+			margin-bottom: 20px;
+		}
+
+			input[type="range"]:last-child {margin-bottom: 0}
+
+			input[type="range"].vert {background: #74CA00}
+			input[type="range"].rouge {background: #FF3535}
+			input[type="range"].bleu {background: #0099CC}
+
+			input[type="range"]:after {
+				content:"Level";
+				font-size: 20px;
+				color: #000;
+				opacity: 0.2;
+				position: absolute;
+				left: 0;
+				right: 0;
+				text-align: center;
+				padding-top: 8px;
+			}
+
+				input[type="range"].detune:after {content:"Detune"}
+				input[type="range"].cutoff:after {content:"Cutoff"}
+				input[type="range"].resonance:after {content:"Resonance"}
+				input[type="range"].intensity:after {content:"Intensity"}
+
+			input[type="range"]::-webkit-slider-thumb {
+				-webkit-appearance: none;
+				width: 40px; height: 40px;
+				background: #4E4E4E;
+				opacity: 1;
+				position: relative;
+				z-index: 2;
+				border:none;
+			}
+
+	#orientation_toggle {
+		position: absolute;
+		right: 5px;
+		top: 22px;
+	}
