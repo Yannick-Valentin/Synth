@@ -146,6 +146,8 @@ body {
 		input[type="radio"], input[type="checkbox"] {
 			-webkit-appearance: none;
    			border-radius: 0;
+   			border: none;
+   			background: transparent;
 			width: 39px; height: 39px;
 			display: block;
 			float: left;
@@ -176,6 +178,9 @@ body {
 		/* Range */
 		input[type="range"] {
 			-webkit-appearance: none;
+			-webkit-border-radius: 0;
+			-moz-border-radius: 0;
+			border-radius: 0;
 			display: block;
 			vertical-align: middle;
 			width: 100%;
