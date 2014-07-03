@@ -70,6 +70,8 @@ body {
 	padding-left: 240px;
 }
 
+p {margin: 0 0 1em}
+
 #synth-pad-wrapper {
 	overflow: hidden;
 	width: 100%;
@@ -133,7 +135,7 @@ body {
 
 	.panel {
 		position: relative;
-		padding-top: 35px;
+		padding-top: 30px;
 		background: -moz-linear-gradient(top, rgba(8,8,8,1) 0%, rgba(21,21,21,0) 35px);
 		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(8,8,8,1)), color-stop(35px,rgba(21,21,21,0)));
 		background: -webkit-linear-gradient(top, rgba(8,8,8,1) 0%,rgba(21,21,21,0) 35px);
@@ -142,11 +144,15 @@ body {
 		background: linear-gradient(to bottom, rgba(8,8,8,1) 0%,rgba(21,21,21,0) 35px);
 	}
 
+		#control_panel p {
+			padding-top: 9px;
+			margin: 0;
+			color: #666;
+		}
+
 		a {
 			color: #FFF;
 			text-decoration: none;
-			display: block;
-			padding-top: 9px;
 			opacity: 0.5;
 			.-webkit-transition: opacity ease 150ms;
 			-moz-transition: opacity ease 150ms;
@@ -255,3 +261,20 @@ body {
 		right: 5px;
 		top: 29px;
 	}
+
+/* #info_modal {
+	position: fixed;
+	background: white;
+	z-index: 1000;
+	width: 60%;
+	left: 50%;
+	margin-left: -30%;
+	height: 400px;
+	top: 50%;
+	margin-top: -200px;
+	color: #333;
+	padding: 30px;
+	-webkit-box-shadow: 0 0 60px rgba(0,0,0,0.8), 0 0 0 10000px rgba(0,0,0,0.6);
+	-moz-box-shadow: 0 0 60px rgba(0,0,0,0.8), 0 0 0 10000px rgba(0,0,0,0.6);
+	box-shadow: 0 0 60px rgba(0,0,0,0.8), 0 0 0 10000px rgba(0,0,0,0.6);
+} */

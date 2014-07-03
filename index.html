@@ -1,15 +1,28 @@
 <!doctype html>
 <html lang="fr">
 <head>
+
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>HTML5 Audio API Synthetiser</title>
+	<title>HTML5 Audio API - Synthétiseur Monophonique</title>
 
 	<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/style.css?234">
+
+	<script>
+/*
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-24865865-2', 'yvalentin.com');
+	ga('send', 'pageview');
+*/
+	</script>
+
 </head>
 <body>
 
@@ -22,59 +35,76 @@
 				<h2>Oscillator 1</h2>
 
 				<div class="clearfix radio_wrapper">
+
 					<input type="radio" name="osc1_waveform" value="sine" class="icon-sine" id="osc1_sine" checked>
+
 					<input type="radio" name="osc1_waveform" value="square" class="icon-square" id="osc1_square">
+
 					<input type="radio" name="osc1_waveform" value="sawtooth" class="icon-sawtooth" id="osc1_sawtooth" >
+
 					<input type="radio" name="osc1_waveform" value="triangle" class="icon-triangle" id="osc1_triangle">
+
 				</div>
-				
 
 				<input id="osc1_volume" class="vert level" type="range" value="100" max="100" min="0">
 
 			</div>
-			<div class="panel">
-			
+
+			<div class="panel">		
+
 				<h2>Oscillator 2</h2>
 
 				<div class="clearfix radio_wrapper">
-					<input type="radio" name="osc2_waveform" value="sine" class="icon-sine" id="osc2_sine">
-					<input type="radio" name="osc2_waveform" value="square" class="icon-square" id="osc2_square" checked>
-					<input type="radio" name="osc2_waveform" value="sawtooth" class="icon-sawtooth" id="osc2_sawtooth">
-					<input type="radio" name="osc2_waveform" value="triangle" class="icon-triangle" id="osc2_triangle">
-				</div>
-				
-				<input id="osc2_volume" class="vert level" type="range" value="100" max="100" min="0">
-				<input id="osc2_detune" class="vert detune" type="range" value="0" max="1000" min="0">
 
-			
+					<input type="radio" name="osc2_waveform" value="sine" class="icon-sine" id="osc2_sine">
+
+					<input type="radio" name="osc2_waveform" value="square" class="icon-square" id="osc2_square" checked>
+
+					<input type="radio" name="osc2_waveform" value="sawtooth" class="icon-sawtooth" id="osc2_sawtooth">
+
+					<input type="radio" name="osc2_waveform" value="triangle" class="icon-triangle" id="osc2_triangle">
+
+				</div>				
+
+				<input id="osc2_volume" class="vert level" type="range" value="100" max="100" min="0">
+
+				<input id="osc2_detune" class="vert detune" type="range" value="0" max="1000" min="0">
+		
 			</div>
+
 			<div class="panel">
 
 				<input type="checkbox" class="icon-orientation" id="orientation_toggle">
+
 				<h2>HP Filter</h2>
+
 				<input id="lpf_cutoff" class="rouge cutoff" type="range" value="100" max="100" min="0">
+
 				<input id="lpf_resonance" class="rouge resonance" type="range" value="0" max="20" min="0">	
-			
+
 			</div>
+
 			<div class="panel">
 
 				<h2>LFO</h2>
+
 				<input id="lfo_intensity" class="bleu intensity" type="range" value="0" max="100" min="0">
 
 			</div>
 
-			<a href="http://yvalentin.com" target="_blank">yvalentin.com</a>
+			<p><a href="http://yvalentin.com" target="_blank">yvalentin.com</a></p>
 
 		</form>
 
 	</div>
 
 	<div id="synth-pad-wrapper">
+
 		<div id="finger"></div>
 		<div id="synth-pad"></div>
+
 	</div>
-	
-	
+
 	<script src="js/app_.js"></script>
 
 </body>
